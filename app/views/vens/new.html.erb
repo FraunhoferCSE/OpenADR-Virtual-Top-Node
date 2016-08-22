@@ -1,0 +1,10 @@
+<%= generate_notice notice %>
+<%= generate_error flash[:error] %>
+
+<%= generate_errors @ven, "prohibited this VEN from being created:" %>
+
+<%= generate_edit_columns [@account, @ven], Ven,
+    "Identification",
+    [:name, :common_name, :account_id],
+    "Create VEN"
+%>

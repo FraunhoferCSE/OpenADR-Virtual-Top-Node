@@ -1,0 +1,23 @@
+<% javascript 'report_requests.js' %>
+
+<%= generate_notice notice %>
+
+<%= generate_errors @report_request, "prohibited this request from being created:" %>
+
+<%= generate_view_details_column(@report_request, ReportRequest, "Request ID",
+                                     [:request_id], true)
+%>
+
+<%= generate_view_details_column(@report_request, ReportRequest, "Report Specifier & Interval",
+                                     [:dtstart, :duration, :report_back_duration, :granularity, :is_metadata])
+%>
+
+<% if  not @report_request.is_metadata? %>
+<div id="rid_content">
+  <%= render 'rids' %>
+</div>
+<% end %>
+
+<div class="span-19">
+    <%= link_to 'Back to Create Report', create_report_path(@create_report) %>
+</div>

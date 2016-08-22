@@ -1,0 +1,126 @@
+<%= generate_notice notice %>
+<%= generate_error flash[:error] %>
+
+<%= generate_errors @ven, "prohibited this VEN from being saved:" %>
+
+<ul class="nav nav-tabs">
+  <li><a data-toggle="tab" href="#ven-settings">VEN Settings</a></li>
+  <li><a data-toggle="tab" href="#registrations">Registrations</a></li>
+  <li><a data-toggle="tab" href="#resources">Resources</a></li>
+  <li><a data-toggle="tab" href="#subscriptions">Subscriptions</a></li>
+  <li><a data-toggle="tab" href="#reports">Reports</a></li>
+  <li><a data-toggle="tab" href="#opt-schedules">Opt Schedules</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane" id="ven-settings">
+    <%= generate_view_details_column(@ven, Ven, "Identification",
+        [:name, :common_name, :ven_id, :email, :account_id]) %>
+
+    <%= generate_view_details_column(@ven, Ven, "OpenADR Profile Settings",
+        [:profile_id, :http_push, :transport_address]) %>
+
+    <%= generate_view_details_column(@ven, Ven, "Capabilities",
+                                     [:shed_capability, :ramp_period, :recovery_period]) %>
+
+    <%= generate_edit_columns(@ven, Ven, "VEN Location",
+        [:address, :state, :zip, :geospatial_location, :grid_electrical_coordinates],
+        "Update VEN") %>
+  </div>
+  <div class="tab-pane" id="registrations">
+    <%= generate_ven_admin_control(@ven) %>
+
+    <% if not @ven.registration.nil? %>
+      <%= generate_view_details_column(@ven.registration, Registration, "VEN Registration Details",
+         [:request_id, :registration_id, :ven_id, :oadr_profile_name, :oadr_transport_name,
+          :oadr_report_only, :oadr_xml_signature, :oadr_ven_name, :oadr_http_pull_model, :oadr_transport_address], true)
+      %>
+
+    <% else %>
+      <h2>VEN Not Registered</h2>
+    <% end %>
+  </div>
+  <div class="tab-pane" id="resources">
+    <%= generate_list(@ven.resources, Resource, "VEN Resources",
+        [:name, :resource_type_id, :address, :shed_capability, :ramp_period, :recovery_period],
+        new_ven_resource_path(@ven),
+        "Add Resource") %>
+  </div>
+  <div class="tab-pane" id="subscriptions">
+
+    <div class="form">
+        <fieldset>
+            <h3 class="fieldset-heading">Market Context Subscriptions</h3>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Market Context</th>
+                  <th>Party ID</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @subscriptions.each do |record| %>
+
+                  <tr>
+                    <td>
+                      <%= record.name %>
+                    </td>
+                    <td>
+                      <%= record.party_name %>
+                    </td>
+
+                    <td>
+                      <div class="actions">
+
+                        <% if record.party_name.nil? %>
+
+                          <%= form_for(:market_contexts, url: subscribe_market_context_path(record.market_context_id, @ven.id)) do |f| %>
+
+                            <div class="actions">
+                              <%= f.submit "Subscribe", class: 'btn btn-primary btn-xs' %>
+                            </div>
+
+                          <% end %>
+
+                        <% else %>
+
+                          <%= form_for(:market_contexts, url: unsubscribe_market_context_path(record.market_context_id, @ven.id)) do |f| %>
+
+                            <div class="actions">
+                              <%= f.submit "Unsubscribe", class: 'btn btn-primary btn-xs' %>
+                            </div>
+
+                          <% end %>
+
+                        <% end %>
+
+                      </div>
+                    </td>
+                  </tr>
+
+                <% end %>
+              </tbody>
+
+            </table>
+        </fieldset>
+    </div>
+
+  </div>
+  <div class="tab-pane" id="reports">
+    <%= generate_list(@ven.reports, Report, "Reports",
+        [:report_specifier_id, :created_date_time, :duration, :report_name_id],
+        nil,
+        "Add Report") %>
+
+    <%= generate_list(@ven.create_reports, CreateReport, "Report Requests",
+        [:name, :description, :request_id, :active],
+        new_ven_create_report_path(@ven),
+        "Create Report Request") %>
+  </div>
+  <div class="tab-pane" id="opt-schedules">
+    <%= generate_list(@ven.opt_schedules, OptSchedule, "Opt Schedules", [:opt_id, :opt_reason_id, :opt_type_id], nil, '') %>
+  </div>
+</div>

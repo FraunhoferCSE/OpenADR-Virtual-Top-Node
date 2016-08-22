@@ -1,0 +1,7 @@
+<%= generate_error flash[:error] %>
+<%= generate_notice notice %>
+
+<%= generate_accounts_list(@accounts, Account, "Accounts",
+    [:name, :email, :company, :is_admin],
+    new_account_path,
+    "Create Account") %>

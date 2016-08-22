@@ -1,0 +1,7 @@
+<%= generate_error flash[:error] %>
+<%= generate_notice notice %>
+
+<%= generate_list(@events, Event, "Events",
+    [:event_id, :dtstart, :priority, :event_status_id, :market_context_id, :test_event],
+    new_event_path,
+    "Create Event") %>

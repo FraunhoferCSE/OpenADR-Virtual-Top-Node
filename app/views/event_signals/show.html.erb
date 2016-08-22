@@ -1,0 +1,23 @@
+<%= generate_notice notice %>
+<%= generate_error flash[:error] %>
+
+<%= generate_errors @event_signal_interval, "prohibited this Interval from being created or updated:" %>
+
+<%= generate_view_details_column(@event_signal.event, Event, "Event Details",
+    [:event_id, :dtstart, :duration, :market_context_id], true) %>
+
+<% if @event_signal.baseline != true %>
+  <%= generate_view_details_column(@event_signal, EventSignal, "Event Signal",
+      [:signal_name_id, :signal_type_id, :emix_unit_id, :current_value, :signal_id, :end_device_asset_id]) %>
+
+<% else %>
+  <%= generate_view_details_column(@event_signal, EventSignal, "Baseline",
+      [:dtstart, :duration, :baseline_name, :baseline_id, :emix_unit_id, :end_device_asset_id]) %>
+
+<% end %>
+
+<%= generate_edit_table(@event_signal.event_signal_intervals, [@event_signal, @event_signal_interval],
+    EventSignalInterval, "Intervals", [:duration, :uid, :payload, :payload_type_id],
+    method(:edit_event_signal_interval_path)) %>
+
+<%= link_to 'Back', event_path(@event), class: 'btn btn-default' %>

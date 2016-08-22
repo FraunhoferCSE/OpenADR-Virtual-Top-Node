@@ -1,0 +1,12 @@
+<%= generate_notice notice %>
+<%= generate_error flash[:error] %>
+
+<%= generate_errors @create_report, "prohibited this Report Request from being created:" %>
+
+<%= generate_edit_columns [@ven, @create_report], CreateReport,
+                             "Report Request",
+                             [:name, :description, nil],
+                             "Create Report Request"
+%>
+
+<%= link_to 'Back to VEN', ven_path(@ven), class: 'btn btn-default' %>

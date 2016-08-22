@@ -1,0 +1,24 @@
+<%= generate_view_details_column(@report, Report, "Report Identification",
+    [:ven_id, :report_name_id, :report_specifier_id, :duration, :created_date_time], true) %>
+
+<%= generate_list_readonly(@report.report_interval_descriptions, ReportIntervalDescription, "Report Description",
+    [:rid, :reading_type_id, :emix_item, :report_data_source, :sampling_rate_max_period, :sampling_rate_min_period, :sampling_rate_on_change]) %>
+
+<% if @report.report_name.name.include?("STATUS") %>
+
+  <% @report.report_interval_descriptions.each do |report_interval_descripton| %>
+    <%= generate_list_readonly(report_interval_descripton.report_intervals.limit(30), ReportInterval, "Intervals (#{report_interval_descripton.rid})",
+        [:dtstart, :online, :manual_override, :data_quality_id, :uid]) %>
+
+  <% end %>
+
+<% else %>
+
+  <% @report.report_interval_descriptions.each do |report_interval_descripton| %>
+    <%= generate_list_readonly(report_interval_descripton.report_intervals.limit(30), ReportInterval, "Intervals (#{report_interval_descripton.rid})",
+        [:dtstart, :duration, :value, :data_quality_id, :accuracy, :confidence, :uid]) %>
+  <% end %>
+
+<% end %>
+
+<%= link_to 'Back to VEN', ven_path(@report.ven), class: 'btn btn-default' %>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EPRI OADR</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <%= csrf_meta_tags %>
+
+    <%= javascript_include_tag "application" %>
+    <%= yield(:head) %>
+
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="<%= signed_in? ? 'signed-in' : 'signed-in' %> <%= "#{params[:controller]}-#{params[:action]}" %>">
+
+    <%= render 'navigation' %>
+
+
+    <div class="container-fluid content-container">
+      <%= render 'header' %>
+
+      <%= yield %>
+
+      <%= render 'footer' %>
+    </div>
+  </body>
+</html>

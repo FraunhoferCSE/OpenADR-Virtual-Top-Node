@@ -1,0 +1,44 @@
+<div class="form">
+    <fieldset>
+        <h3 class="fieldset-heading">Targets</h3>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><%= column_name %></th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <%= form_for(record, url: add_items_path.call(record), remote: true) do |f| %>
+                  <%= select_tag add_field_name, options_from_collection_for_select(not_in_group, :id, name_field) %>
+                  <%= f.submit 'Add', class: 'btn btn-success btn-sm', data: { 'disable-with' => 'Add' } %>
+                <% end %>
+              </td>
+
+              <td></td>
+            </tr>
+
+            <% in_group.each do |group| %>
+
+              <tr>
+                <td>
+                  <%= group.public_send(assoc_record).public_send(name_field) %>
+                </td>
+                <td>
+                  <%= form_for(record, url: remove_items_path.call(record), remote: true) do |f| %>
+                    <%= hidden_field :id, group.id, {name: remove_field_name, value: group.id} %>
+                    <%= f.submit 'Remove', class: 'btn btn-default btn-sm', data: { 'disable-with' => 'Remove' } %>
+                  <% end %>
+                </td>
+              </tr>
+
+            <% end %>
+          </tbody>
+        </table>
+
+    </fieldset>
+</div>

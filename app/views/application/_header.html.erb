@@ -1,0 +1,22 @@
+<nav class="navbar header" role="navigation">
+
+  <div class="container-fluid">
+    <a class="hamburger toggle-sidebar" href="#">
+      <span></span>
+      <span></span>
+      <span></span>
+      <%= link_to(image_tag('epri-logo-mobile.jpg', alt: 'EPRI logo'), root_path, class: 'logo hidden-sm visible-xs') %>
+    </a>
+
+    <ul class="nav navbar-nav">
+      <% if signed_in? %>
+        <li class="hidden-xs"><p class="navbar-text"><%= "Logged in as <strong>#{current_account.name}</strong>".html_safe %></p></li>
+        <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+      <% else %>
+        <li><p class="navbar-text"><%= "not signed in" %></p></li>
+        <li><%= link_to "Log in", login_path %></li>
+      <% end %>
+      <li class="vissible-sm hidden-xs"><%= link_to "About", about_path %></li>
+    </ul>
+  </div>
+</nav>

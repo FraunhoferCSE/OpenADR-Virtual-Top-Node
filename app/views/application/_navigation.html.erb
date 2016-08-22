@@ -1,0 +1,42 @@
+
+<div class="navigation">
+  <div class="logo">
+    <%= link_to(image_tag('epri-logo.jpg', alt: 'EPRI logo'), root_path, class: 'logo vissible-sm hidden-xs') %>
+  </div>
+
+  <% if signed_in? %>
+    <% if current_account_is_admin %>
+
+      <div class="menu-heading">
+          <h4>Admin Menu</h4>
+      </div>
+
+      <ul>
+        <li><%= nav_link_to "Accounts", accounts_path %></li>
+        <li><%= nav_link_to "VENs", vens_all_path %></li>
+        <li><%= nav_link_to "Resource Types", resource_types_path %></li>
+        <li><%= nav_link_to "Market Contexts", market_contexts_path %></li>
+        <li><%= nav_link_to "Groups", groups_path %></li>
+        <li><%= nav_link_to "Events", events_path %></li>
+        <li><%= nav_link_to "Units", emix_units_path %></li>
+        <li><%= nav_link_to "Schedules", schedules_path %></li>
+        <li><%= nav_link_to "VTN Parameters", vtn_parameters_path %></li>
+        <li><%= nav_link_to "Test Case Prompts", testcaseprompts_path %></li>
+      </ul>
+    <% end %>
+
+    <div class="menu-heading">
+      <h4>User Menu</h4>
+    </div>
+
+    <ul>
+      <li><%= nav_link_to "Account Settings", account_path(current_account) %></li>
+      <li><%= nav_link_to "VENs", account_vens_path(current_account) %></li>
+      <% unless current_account_is_admin %>
+        <li><%= nav_link_to "Create Test Event", new_event_path %></li>
+      <% end %>
+      <li><%= nav_link_to "Dashboard", dashboard_path %></li>
+      <li><%= nav_link_to "Download VEN", root_path + 'epri-oadr2b-ven-v0.7.0.0.zip' %></li>
+    </ul>
+  <% end %>
+</div>

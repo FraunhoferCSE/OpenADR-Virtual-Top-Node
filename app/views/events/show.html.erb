@@ -1,0 +1,104 @@
+<%= generate_notice notice %>
+<%= generate_error flash[:error] %>
+
+<%= generate_errors @event, "prohibited this event from being updated:" %>
+
+<ul class="nav nav-tabs">
+
+  <% if @event.template == true %>
+      <li><a data-toggle="tab" href="#schedule">Schedule</a></li>
+
+  <% else %>
+
+    <li><a data-toggle="tab" href="#publish">Publish</a></li>
+
+  <% end %>
+
+  <li><a data-toggle="tab" href="#settings">Settings</a></li>
+  <li><a data-toggle="tab" href="#response">Response</a></li>
+  <li><a data-toggle="tab" href="#signals">Signals</a></li>
+  <li><a data-toggle="tab" href="#targets">Targets</a></li>
+</ul>
+
+<div class="tab-content">
+  <% if @event.template == true %>
+
+    <div class="tab-pane" id="schedule">
+        <% # generate_errors @schedule, "prohibited this schedule from being updated:" %>
+
+        <%= generate_view_details_column(@schedule, Schedule, "Schedule Duration and Event Start Time",
+            [:start_date, :end_date, :start_time_str]) %>
+
+        <%= generate_view_details_column(@schedule, Schedule, "Weekdays",
+            [:monday, :tuesday, :wednesday, :thursday, :friday]) %>
+
+        <%= generate_view_details_column(@schedule, Schedule, "Weekends",
+            [:saturday, :sunday]) %>
+    </div>
+
+
+    <% else %>
+
+        <div class="tab-pane" id="publish">
+          <%= render 'publish_event', event: @event %>
+          <%= render 'cancel_event', event: @event %>
+        </div>
+
+    <% end %>
+
+    <div class="tab-pane" id="settings">
+      <%= generate_view_details_column(@event, Event, "Active Period",
+          [:event_id, :priority, :market_context_id, :event_status_id, :vtn_comment, :test_event, :created_at, :modification_number]) %>
+
+      <% if @event.template == true %>
+            <%= generate_view_details_column(@event, Event, "Event Descriptor",
+              [:duration, :tolerance, :ei_notification, :ei_rampup, :ei_recovery]) %>
+      <% else %>
+            <%= generate_view_details_column(@event, Event, "Event Descriptor",
+              [:dtstart_str, :duration, :tolerance, :ei_notification, :ei_rampup, :ei_recovery]) %>
+      <% end %>
+    </div>
+
+    <div class="tab-pane" id="response">
+      <%= generate_view_details_column(@event, Event, "Response Required",
+          [:response_required_type_id]) %>
+    </div>
+
+
+  <div class="tab-pane" id="signals">
+    <%= generate_list(@event.event_signals, EventSignal, "Event Signals",
+        [:signal_name_id, :signal_type_id, :current_value, :signal_id, :baseline],
+        new_event_event_signal_path(@event),
+        "Add Signal or Baseline") %>
+  </div>
+
+  <div class="tab-pane" id="targets">
+
+    <div class="processing alert alert-info">Processing... please wait</div>
+
+    <ul class="nav nav-tabs" id="targets-tabs">
+      <li><a href="#tabs-groups" data-toggle="tab">Groups</a></li>
+      <li><a href="#tabs-resources" data-toggle="tab">Resources</a></li>
+      <li><a href="#tabs-vens" data-toggle="tab">VENs</a></li>
+      <li><a href="#tabs-parties" data-toggle="tab">Parties</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane" id="tabs-groups">
+        <%= generate_groups_tab %>
+      </div>
+
+      <div class="tab-pane" id="tabs-resources">
+        <%= generate_resources_tab %>
+      </div>
+
+      <div class="tab-pane" id="tabs-vens">
+        <%= generate_vens_tab %>
+      </div>
+
+      <div class="tab-pane" id="tabs-parties">
+        <%= generate_parties_tab %>
+      </div>
+    </div>
+  </div>
+</div>

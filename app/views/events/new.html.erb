@@ -1,0 +1,24 @@
+<%= generate_notice notice %>
+<%= generate_error flash[:error] %>
+
+<%= generate_errors @event, "prohibited this event from being created:" %>
+
+<%= form_for(@event) do |f| %>
+
+  <%= generate_edit_columns_multi f, @event, Event,
+      "Event Details",
+      [:dtstart_str, :duration, :market_context_id, :priority, :response_required_type_id, :vtn_comment, :test_event]
+  %>
+
+  <%= generate_edit_columns_multi f, @event, Event,
+       "Event Signal and Interval",
+       [:signal_name_id, :signal_type_id, :payload_value]
+  %>
+
+  <div class="actions">
+    <%= f.submit "Create Event", class: 'btn btn-success' %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Back', events_path, class: 'btn btn-default' %>

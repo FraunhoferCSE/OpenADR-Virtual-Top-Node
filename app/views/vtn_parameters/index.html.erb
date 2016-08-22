@@ -1,0 +1,14 @@
+<%= generate_notice notice %>
+
+<%= generate_error flash[:error] %>
+
+<%= generate_errors @vtn_parameters, "prohibited the parameters from being saved:" %>
+
+<%= generate_edit_columns @vtn_parameters, VtnParameter, "VTN Parameters",
+    [:vtn_name, :poll_interval, nil], "Update Parameters" %>
+
+<%= generate_view_details_column @vtn_parameters, VtnParameter, "End Points",
+    [:profile_a_path, :profile_b_path], true %>
+
+<%= generate_edit_columns @vtn_parameters, VtnParameter, "Test VEN",
+    [:ven_id, nil, nil], "Update Test VEN" %>

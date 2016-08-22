@@ -1,0 +1,19 @@
+try {
+  <% if @tab_name == "groups" %>
+    $("#tabs-groups").html("<%= escape_javascript(generate_groups_tab()) %>");
+
+  <% elsif @tab_name == "resources" %>
+    $("#tabs-resources").html("<%= escape_javascript(generate_resources_tab()) %>");
+
+  <% elsif @tab_name == "vens" %>
+    $("#tabs-vens").html("<%= escape_javascript(generate_vens_tab()) %>");
+
+  <% else %>
+    $("#tabs-parties").html("<%= escape_javascript(generate_parties_tab()) %>");
+  <% end %>
+
+  $(".processing").slideUp(1000);
+}
+catch (err) {
+  alert(err);
+}

@@ -1,0 +1,7 @@
+<%= generate_error flash[:error] %>
+<%= generate_notice flash[:notice] %>
+
+<%= generate_list(@vens, Ven, "VENS",
+    [:name, :view_registration_id, :account_id, :last_comm_at, :status],
+    new_account_ven_path(@account),
+    "Create VEN") %>

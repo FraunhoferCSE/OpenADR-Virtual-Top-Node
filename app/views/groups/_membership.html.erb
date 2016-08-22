@@ -1,0 +1,82 @@
+<% if @edit_group %>
+
+  <div class="form">
+      <fieldset>
+          <h3 class="fieldset-heading"><%= @edit_group.name %> membership</h3>
+
+          <%= form_for(@edit_group, url: remove_members_group_path(@edit_group)) do |f| %>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Account Name</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% if @members.any? %>
+                  <% @members.each do |record| %>
+
+                    <tr>
+                      <td>
+                        <div class="checkbox">
+                          <label>
+                            <%= check_box_tag "account[id][]", record.id %>
+                            <%= record.name %>
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td colspan="2">This group is empty</td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <%= f.submit "Remove Accounts", class: 'btn btn-danger' %>
+          <% end %>
+
+          <hr>
+
+          <%= form_for(@edit_group, url: add_members_group_path(@edit_group)) do |f| %>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Account Name</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% if @non_members.any? %>
+                  <% @non_members.each do |record| %>
+
+                    <tr>
+                      <td>
+                        <div class="checkbox">
+                          <label>
+                            <%= check_box_tag 'account[id][]', record.id %>
+                            <%= record.name %>
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td colspan="2"></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <%= f.submit "Add Accounts", class: 'btn btn-success' %>
+          <% end %>
+      </fieldset>
+  </div>
+
+<% end %>

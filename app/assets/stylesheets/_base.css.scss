@@ -1,0 +1,90 @@
+body {
+  font-size: 14px;
+  position: relative;
+
+
+  padding-left: 275px;
+
+  @include respond-to(mobile) {
+    left: 0;
+    padding-left: 0;
+
+    &.sidebar-open {
+      left: 225px;
+    }
+
+    .header .hamburger {
+      display: block;
+    }
+  }
+
+  .container-fluid {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+.header {
+  border: none;
+  border-bottom: 1px solid #eee;
+  border-radius: 0;
+
+  .hamburger {
+    display: none;
+    left: 25px;
+    position: absolute;
+    top: 13px;
+  }
+
+  .logo {
+    display: block;
+    float: left;
+  }
+
+  @include respond-to(mobile) {
+    text-align: center;
+
+    .nav {
+      margin: 0;
+      position: absolute;
+      right: 25px;
+      top: 0;
+    }
+
+    .logo {
+      display: inline-block;
+      float: none;
+    }
+  }
+
+  .nav li {
+    a {
+      padding-bottom: 19px;
+      padding-top: 19px;
+    }
+
+    .navbar-text {
+      margin-bottom: 19px;
+      margin-top: 19px;
+    }
+  }
+}
+
+.debug_dump {
+  margin-top: 20px;
+}
+
+.footer {
+  padding: 0 0 20px;
+
+  @include respond-to(mobile) {
+    text-align: center;
+
+    .pull-right {
+      float: none !important;
+      font-weight: bold;
+    }
+  }
+}
