@@ -1,3 +1,4 @@
+# coding: utf-8
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #
 # Copyright (c) 2013, Electric Power Research Institute (EPRI)
@@ -162,8 +163,8 @@
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 class Oadr20Controller < ApplicationController
-
-
+  # < ActionController::Base. Look up on Torquebox docx. 
+  # TODO: needs knowledge of the ZMQ setup???
   def process_request(oadr_service)
 
     validate = false
@@ -188,7 +189,9 @@ class Oadr20Controller < ApplicationController
     response_xml = oadr_service.process_request(request_xml, ven, validate)
 
     # TODO: log the request and reply
-
+    
+    # TODO: Add Zmq handler here. Post both the request and the response
+    # to a ZMQ PUSH-PULL socket reaching the driven agent. 
 
     # manually set the content-length
     # if this header isn't set, a 'large' response will cause render to use
