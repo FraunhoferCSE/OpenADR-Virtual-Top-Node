@@ -1,3 +1,4 @@
+# coding: utf-8
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #
 # Copyright (c) 2013, Electric Power Research Institute (EPRI)
@@ -230,7 +231,9 @@ module Oadr
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.zmq.port = 19999
   end
 
   VERSION='v0.9.3'
+
 end
