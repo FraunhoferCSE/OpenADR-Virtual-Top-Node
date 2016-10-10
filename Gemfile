@@ -57,6 +57,8 @@ end
 # gem 'jquery-rails', '2.2.1'
 gem 'jquery-rails', '3.0.4'
 gem 'jquery-ui-rails', '4.0.3'
+# Fraunhofer add
+gem "jrzmq", "~> 1.0.3.2"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
