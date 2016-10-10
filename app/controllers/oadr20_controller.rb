@@ -161,6 +161,7 @@
 # * spork-testunit 0.0.8 (http://github.com/timcharper/spork-testunit) - spork-testunit
 #
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#require 'jrzmq'
 
 class Oadr20Controller < ApplicationController
   # < ActionController::Base. Look up on Torquebox docx. 
