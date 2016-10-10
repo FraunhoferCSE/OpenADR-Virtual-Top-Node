@@ -171,7 +171,6 @@ class OadrLogger
   ########################################################
 
   def initialize
-    @topic = ZmqTopic.new()
     @error_logger =  Logger.new('log/error.log')
     @info_logger =  Logger.new('log/info.log')
   end
@@ -202,6 +201,6 @@ class OadrLogger
     time = Time.now.to_s
     @info_logger.info "[#{time}] [Info      ] #{message}"
 
-    @topic.post(message)
+    ZmqTopic.instance.post(message)
   end
 end
