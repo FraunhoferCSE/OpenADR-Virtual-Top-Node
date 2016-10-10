@@ -186,7 +186,8 @@ class Oadr20Controller < ApplicationController
     end
 
     request_xml = request.body.read
-
+    ZmqTopic.instance.post(request_xml)
+    #OadrLogger
     response_xml = oadr_service.process_request(request_xml, ven, validate)
 
     # TODO: log the request and reply
