@@ -14,6 +14,6 @@ class ZmqTopic
     @outbound.bind("tcp://*:9099")
   end
   def post (msg)
-    @outbound.send(msg)
+    @outbound.send_string(msg)
   end
 end
