@@ -1,3 +1,4 @@
+# coding: utf-8
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #
 # Copyright (c) 2013, Electric Power Research Institute (EPRI)
@@ -163,6 +164,7 @@
 
 # require 'lib/oadr/registerparty'
 # require 'registerparty.rb'
+require 'jrzmq'
 
 class Oadr20bController < Oadr20Controller
 
