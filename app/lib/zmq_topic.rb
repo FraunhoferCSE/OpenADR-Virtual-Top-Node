@@ -11,8 +11,11 @@ class ZmqTopic
   def initialize
     OadrLogger.instance.log_info('starting ZMQ service')
     @mutex  = Mutex.new()
+    OadrLogger.instance.log_info('ZMQ got mutex')
     @context = ZMQ::Context.new(1)
+    OadrLogger.instance.log_info('ZMQ got context')
     @outbound = @context.socket(ZMQ::PUB )
+    OadrLogger.instance.log_info('ZMQ got socket')
     @outbound.bind("tcp://*:9044")
     OadrLogger.instance.log_info('started ZMQ service')
   end
