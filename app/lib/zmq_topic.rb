@@ -1,12 +1,12 @@
 #
 #
 
-require 'singleton'
+#require 'singleton'
 require 'jrzmq'
-require 'app/lib/oadr_logger'
+#require 'app/lib/oadr_logger'
 
 class ZmqTopic
-  include Singleton
+  #include Singleton
   # todo: is this necessary?
   def initialize
     OadrLogger.instance.log_info('starting ZMQ service')
