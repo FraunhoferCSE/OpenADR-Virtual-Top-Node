@@ -1,3 +1,4 @@
+# coding: utf-8
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #
 # Copyright (c) 2013, Electric Power Research Institute (EPRI)
@@ -199,5 +200,7 @@ class OadrLogger
   def log_info(message)
     time = Time.now.to_s
     @info_logger.info "[#{time}] [Info      ] #{message}"
+
+    ZmqTopic.instance.post(message)
   end
 end
