@@ -451,7 +451,7 @@ class EventsController < BaseController
 
       if Event.default_event(@event, signal_name_id, signal_type_id, payload_value, account)
 
-        if @event.dtstart != nil
+        if nil != @event.dtstart
           if @event.dtstart < DateTime.now 
             @event.event_status = EventStatus.find_by_name("active")
             @event.save
