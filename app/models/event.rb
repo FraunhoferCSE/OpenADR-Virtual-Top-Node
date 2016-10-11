@@ -274,7 +274,7 @@ class Event < ActiveRecord::Base
 
   validates_each :dtstart_str do |record, atr, value|
 
-  	if (value && ((DateTime.parse(value) rescue ArgumentError) == ArgumentError))
+  	if (value && ArgumentError == (DateTime.parse(value) rescue ArgumentError))
   		record.errors.add(atr, 'must be a valid datetime')
     else
       if not value.nil?
