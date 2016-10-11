@@ -1,3 +1,4 @@
+# coding: utf-8
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #
 # Copyright (c) 2013, Electric Power Research Institute (EPRI)
@@ -273,7 +274,7 @@ class Event < ActiveRecord::Base
 
   validates_each :dtstart_str do |record, atr, value|
 
-  	if (value && (DateTime.parse(value) rescue ArgumentError) == ArgumentError)
+  	if (value && ((DateTime.parse(value) rescue ArgumentError) == ArgumentError))
   		record.errors.add(atr, 'must be a valid datetime')
     else
       if not value.nil?
