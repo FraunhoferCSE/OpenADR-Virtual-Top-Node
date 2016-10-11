@@ -14,7 +14,7 @@ class ZmqTopic
     @outbound.bind("tcp://*:9044")
   end
   def post (msg)
-    with_mutex {@outbound.send_string(msg)}
+    with_mutex {@outbound.send(msg)}
   end
   def with_mutex
     @mutex.synchronize { yield }
