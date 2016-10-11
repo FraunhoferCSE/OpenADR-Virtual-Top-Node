@@ -1,3 +1,4 @@
+# coding: utf-8
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #
 # Copyright (c) 2013, Electric Power Research Institute (EPRI)
@@ -450,9 +451,11 @@ class EventsController < BaseController
 
       if Event.default_event(@event, signal_name_id, signal_type_id, payload_value, account)
 
-        if @event.dtstart != nil && @event.dtstart < DateTime.now 
-          @event.event_status = EventStatus.find_by_name("active")
-          @event.save
+        if @event.dtstart != nil
+          if @event.dtstart < DateTime.now 
+            @event.event_status = EventStatus.find_by_name("active")
+            @event.save
+          end
         end
 
         if current_account_is_admin
