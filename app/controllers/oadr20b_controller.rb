@@ -164,7 +164,7 @@
 
 # require 'lib/oadr/registerparty'
 # require 'registerparty.rb'
-require 'jrzmq'
+#require 'jrzmq'
 
 class Oadr20bController < Oadr20Controller
 

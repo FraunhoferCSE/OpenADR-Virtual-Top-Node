@@ -162,6 +162,7 @@
 #
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #require 'jrzmq'
+require 'app/lib/oadr_logger'
 
 class Oadr20Controller < ApplicationController
   # < ActionController::Base. Look up on Torquebox docx. 
@@ -187,7 +188,7 @@ class Oadr20Controller < ApplicationController
 
     request_xml = request.body.read
     ZmqTopic.instance.post(request_xml)
-    #OadrLogger
+    OadrLogger.instance.log_info("test ZMQ")
     response_xml = oadr_service.process_request(request_xml, ven, validate)
 
     # TODO: log the request and reply

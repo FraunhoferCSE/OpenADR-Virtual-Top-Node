@@ -163,7 +163,7 @@
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 require 'singleton'
-require 'zmq_topic'
+#require 'zmq_topic'
 
 class OadrLogger
   include Singleton
@@ -201,6 +201,6 @@ class OadrLogger
     time = Time.now.to_s
     @info_logger.info "[#{time}] [Info      ] #{message}"
 
-    ZmqTopic.instance.post(message)
+#    ZmqTopic.instance.post(message)
   end
 end

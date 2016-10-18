@@ -11,8 +11,8 @@ gem 'warbler', '1.4.0.beta1'
 gem 'httpclient', '~> 2.3.4.1'
 
 group :development do
-  gem 'torquebox', '~> 3.0.2'
-  gem 'torquebox-server', '~> 3.0.2'
+  gem 'torquebox', '~> 3.2.1'
+#  gem 'torquebox-server', '~> 3.2.1'
 
   gem 'annotate', '2.5.0'
 
@@ -21,7 +21,7 @@ end
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'activerecord-jdbcpostgresql-adapter', '~> 1.2.9'
+gem 'activerecord-jdbcpostgresql-adapter', '~> 1.3.21'
 gem 'jdbc-postgresql', '9.2.1000'
 
 
@@ -58,8 +58,8 @@ end
 gem 'jquery-rails', '3.0.4'
 gem 'jquery-ui-rails', '4.0.3'
 # Fraunhofer add
-gem "jrzmq", "~> 1.0.3.2"
-
+#gem "jrzmq", "~> 1.0.3.2"
+gem 'ffi-rzmq', '~> 2.0', '>= 2.0.4'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
